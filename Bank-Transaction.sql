@@ -39,7 +39,7 @@ WHERE "Transaction Description" = 'Money transfer'
   AND "Debit Amount" < 400;
 
 -- ============================================================
--- 3. SPENDING CATEGORIES (UK Only)
+-- 3. SPENDING CATEGORIES
 -- ============================================================
 
 WITH categorized AS (
@@ -167,10 +167,10 @@ GROUP BY day_name, day_number
 ORDER BY day_number;
 
 -- ============================================================
--- 7. TOP 3 SPENDING CATEGORIES (ENGLISH KEYWORDS)
+-- 7. TOP 3 SPENDING CATEGORIES 
 -- ============================================================
 
-WITH categorized_english AS (
+WITH categorizedAS (
     SELECT
         "Transaction Description",
         "Debit Amount",
@@ -222,7 +222,7 @@ SELECT
     category,
     COUNT(*) AS transaction_count,
     ROUND(SUM("Debit Amount")::NUMERIC, 2) AS total_spent
-FROM categorized_english
+FROM categorized
 GROUP BY category
 ORDER BY total_spent DESC
 LIMIT 3;
